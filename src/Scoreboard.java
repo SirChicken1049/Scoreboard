@@ -29,4 +29,9 @@ public String getScore() {
     return teamOneScore + "-" + teamTwoScore + "-" + activeTeam;
 }
 
+public String win() {
+    if (teamOneScore > teamTwoScore) return teamOne;
+    if (teamTwoScore > teamOneScore) return teamTwo;
+    return "DRAW";
+}
 }
