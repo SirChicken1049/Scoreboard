@@ -6,9 +6,11 @@ public class GameSimulator {
             "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"
     };
     private static Team[] standings = new Team[teams.length];
+
     public static void main(String[] args) throws FileNotFoundException {
         new GameSimulator(1000);
     }
+
     public GameSimulator(int games) throws FileNotFoundException {
         for (int i = 0; i < teams.length; i++) {
             standings[i] = new Team(teams[i]);
@@ -16,6 +18,7 @@ public class GameSimulator {
         play();
         printStandings();
     }
+
     public void play() throws FileNotFoundException {
         Scanner s = new Scanner(new File("Scoreboard.txt"));
         while (s.hasNext()) {
@@ -26,36 +29,46 @@ public class GameSimulator {
                 sb.recordPlay(s.nextInt());
             }
             if (sb.win().equals("Red")) {
-                standings[0].win();
+                standings[0].wins();
             }
             if (sb.win().equals("Orange")) {
-                standings[1].win();
+                standings[1].wins();
             }
             if (sb.win().equals("Yellow")) {
-                standings[2].win();
+                standings[2].wins();
             }
             if (sb.win().equals("Green")) {
-                standings[3].win();
+                standings[3].wins();
             }
             if (sb.win().equals("Blue")) {
-                standings[4].win();
+                standings[4].wins();
             }
             if (sb.win().equals("Indigo")) {
-                standings[5].win();
+                standings[5].wins();
             }
             if (sb.win().equals("Violet")) {
-                standings[6].win();
-            }
-            public void printStandings() {
-                sort();
-                for (Team t : standings)
-                    System.out.println(t + "" + t.getWins());
-            }
-            public void sort() {
-                for (int i = 0; i < standings.length - 1; i++){
-                    int max = i;
-                    for (int j = i + 1;j < standings.length; j++) {
-                }
+                standings[6].wins();
             }
 
         }
+    }
+    public void printStandings() {
+        sort();
+        for (Team t : standings)
+            System.out.println(t + "" + t.getWins());
+    }
+    public void sort() {
+        for (int i = 0; i < standings.length - 1; i++) {
+            int max = i;
+            for (int j = i + 1; j < standings.length; j++) {
+                if (standings[j].getWins() > standings[max].getWins()) ;
+                max = j;
+            }
+            if (i != max) {
+                Team temp = standings[i];
+                standings[i] = standings[max];
+                standings[max] = temp;
+            }
+        }
+    }
+}
